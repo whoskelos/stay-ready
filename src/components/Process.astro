@@ -1,0 +1,50 @@
+---
+import type { IconName } from '../lib/icons';
+import IconBadge from './IconBadge.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  highlight?: string;
+  subtitle?: string;
+  steps: { title: string; description?: string; icon: IconName }[];
+}
+
+const { eyebrow, title, highlight, subtitle, steps } = Astro.props;
+---
+
+<section id="como-trabajamos" aria-labelledby="proceso-title" class="bg-card py-20 sm:py-24">
+  <div class="mx-auto max-w-(--container-page) px-4 sm:px-6">
+    <SectionHeading {eyebrow} {title} {highlight} {subtitle} id="proceso-title" />
+
+    <ol class="relative mx-auto mt-14 grid max-w-4xl gap-10 lg:max-w-none lg:grid-cols-4 lg:gap-6">
+      <!-- Línea conectora: vertical en móvil, horizontal desde lg, siempre detrás de los iconos -->
+      <span
+        aria-hidden="true"
+        class="absolute top-8 bottom-8 left-8 w-px bg-line lg:inset-x-0 lg:top-8 lg:bottom-auto lg:left-0 lg:h-px lg:w-auto"
+      ></span>
+      {
+        steps.map((step, index) => (
+          <li class="relative flex items-start gap-5 text-left lg:flex-col lg:items-center lg:gap-0 lg:text-center">
+            <span class="relative z-10 shrink-0">
+              <IconBadge name={step.icon} size="size-16" iconClass="size-6" />
+              <span
+                aria-hidden="true"
+                class="absolute -top-1 -right-1 flex size-6 items-center justify-center rounded-full bg-card font-display text-xs font-semibold text-navy shadow-card"
+              >
+                {index + 1}
+              </span>
+            </span>
+            <div class="lg:mt-5">
+              <h3 class="font-display text-lg font-semibold">{step.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink-soft lg:mx-auto lg:max-w-56">
+                {step.description}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
