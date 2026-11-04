@@ -3,11 +3,17 @@ import Contact from '../components/Contact.astro';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Solutions from '../components/Solutions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { mailHref, telHref, whatsappHref } from '../lib/contact';
 import { getHome, getOrderedItems, getSite } from '../lib/content';
 
-const [site, home, values] = await Promise.all([getSite(), getHome(), getOrderedItems('values')]);
+const [site, home, values, services] = await Promise.all([
+  getSite(),
+  getHome(),
+  getOrderedItems('values'),
+  getOrderedItems('services'),
+]);
 const callHref = telHref(site);
 ---
 
@@ -27,6 +33,7 @@ const callHref = telHref(site);
     callHref={callHref}
     values={values}
   />
+  <Solutions {...home.solutions} {services} />
   <Contact
     eyebrow={home.contact.eyebrow}
     title={home.contact.title}

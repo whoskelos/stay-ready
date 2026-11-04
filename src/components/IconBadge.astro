@@ -9,15 +9,18 @@ interface Props {
   tone?: 'brand' | 'whatsapp';
   /** Clases de tamaño del círculo. */
   size?: string;
+  /** Círculo completo o cuadrado con esquinas muy redondeadas. */
+  shape?: 'circle' | 'rounded';
   iconClass?: string;
 }
 
-const { name, tone = 'brand', size = 'size-12', iconClass = 'size-5' } = Astro.props;
+const { name, tone = 'brand', size = 'size-12', shape = 'circle', iconClass = 'size-5' } = Astro.props;
 ---
 
 <span
   class:list={[
-    'inline-flex shrink-0 items-center justify-center rounded-full text-white shadow-icon',
+    'inline-flex shrink-0 items-center justify-center text-white shadow-icon',
+    shape === 'circle' ? 'rounded-full' : 'rounded-2xl',
     tone === 'brand' ? 'bg-brand-gradient' : 'bg-whatsapp',
     size,
   ]}
