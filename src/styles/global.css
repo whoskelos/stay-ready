@@ -1,4 +1,4 @@
-﻿@import 'tailwindcss';
+@import 'tailwindcss';
 
 /* Fuentes autoalojadas (Fontsource), solo subconjunto latino y 4 pesos. */
 @import '@fontsource/outfit/latin-600.css';
@@ -33,7 +33,7 @@
   --radius-banner: 2rem;
 
   --shadow-card: 0 1px 2px rgb(12 35 82 / 0.04), 0 8px 24px rgb(12 35 82 / 0.06);
-  --shadow-lift: 0 4px 8px rgb(12 35 82 / 0.05), 0 20px 40px rgb(12 35 82 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(12 35 82 / 0.04), 0 14px 32px rgb(12 35 82 / 0.10);
   --shadow-icon: 0 8px 20px rgb(0 148 143 / 0.3);
 
   --container-page: 72rem;
