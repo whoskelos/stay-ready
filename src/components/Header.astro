@@ -75,7 +75,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
           <li>
             <a
               href={item.href}
-              class="flex min-h-11 items-center rounded-2xl px-4 font-medium text-navy hover:bg-surface"
+              class="flex min-h-11 items-center rounded-2xl px-4 font-medium text-navy hover:bg-surface aria-[current=true]:bg-surface"
             >
               {item.label}
             </a>
@@ -94,6 +94,30 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
   const update = () => header?.toggleAttribute('data-scrolled', window.scrollY > 24);
   update();
   window.addEventListener('scroll', update, { passive: true });
+
+  // Scroll-spy: marca con `aria-current` el enlace de la sección que está en pantalla.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('#site-header nav a[href^="#"]')];
+  const sections = [...new Set(links.map((link) => link.getAttribute('href')!.slice(1)))]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  const markCurrent = () => {
+    // Línea de lectura: un tercio de la ventana, por debajo de la cabecera.
+    const line = window.innerHeight * 0.33;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let current = sections[0];
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= line) current = section;
+    }
+    if (atBottom) current = sections[sections.length - 1];
+    for (const link of links) {
+      if (link.getAttribute('href') === `#${current?.id}`) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
+    }
+  };
+  markCurrent();
+  window.addEventListener('scroll', markCurrent, { passive: true });
+  window.addEventListener('resize', markCurrent);
 
   // Cierra el menú móvil al elegir una sección
   menu?.addEventListener('click', (event) => {
