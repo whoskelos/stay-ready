@@ -22,6 +22,10 @@ const { title, description, path, image, noindex, jsonLd, skipLabel } = Astro.pr
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f9fcfe" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <SEO {title} {description} {path} {image} {noindex} {jsonLd} />
     <!-- Activa la entrada al scroll antes del primer pintado; si el script de abajo falla, se desactiva -->
     <script is:inline>

@@ -11,6 +11,7 @@ import Solutions from '../components/Solutions.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { mailHref, telHref, whatsappHref } from '../lib/contact';
 import { getHome, getOrderedItems, getSite } from '../lib/content';
+import { buildJsonLd } from '../lib/structured-data';
 
 const [site, home, values, services, steps, sectors] = await Promise.all([
   getSite(),
@@ -27,6 +28,8 @@ const callHref = telHref(site);
   title={site.seo.title}
   description={site.seo.description}
   path="/"
+  image="/og-image.jpg"
+  jsonLd={buildJsonLd(site, Astro.site!)}
   skipLabel={site.a11y.skipLink}
 >
   <Header
