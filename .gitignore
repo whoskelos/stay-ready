@@ -43,3 +43,7 @@ lighthouse*.json
 lh-report*.json
 *.tmp.*
 *.log
+
+# material interno del proyecto (brief, referencias de diseño, contrato de trabajo)
+docs/
+PROMPT.md

@@ -38,7 +38,6 @@ src/
   styles/global.css   Tokens de diseño (@theme) y utilidades
 public/           Favicon, iconos de app e imagen Open Graph
 scripts/          generate-icons.mjs: regenera los iconos desde src/assets/logo.webp
-docs/             Brief, secciones y contenido de partida
 ```
 
 ## Antes de publicar: datos provisionales
