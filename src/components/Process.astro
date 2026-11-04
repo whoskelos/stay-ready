@@ -26,7 +26,7 @@ const { eyebrow, title, highlight, subtitle, steps } = Astro.props;
       ></span>
       {
         steps.map((step, index) => (
-          <li class="relative flex items-start gap-5 text-left lg:flex-col lg:items-center lg:gap-0 lg:text-center">
+          <li data-reveal style={`--reveal-delay:${Math.min(index, 5) * 70}ms`} class="relative flex items-start gap-5 text-left lg:flex-col lg:items-center lg:gap-0 lg:text-center">
             <span class="relative z-10 shrink-0">
               <IconBadge name={step.icon} size="size-16" iconClass="size-6" />
               <span

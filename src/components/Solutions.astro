@@ -20,8 +20,8 @@ const { eyebrow, title, highlight, subtitle, services } = Astro.props;
 
     <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {
-        services.map((service) => (
-          <li>
+        services.map((service, index) => (
+          <li data-reveal style={`--reveal-delay:${Math.min(index, 5) * 70}ms`}>
             <article class="h-full rounded-(--radius-card) border border-line bg-card p-7">
               <IconBadge name={service.icon} shape="rounded" size="size-12" />
               <h3 class="mt-6 font-display text-lg font-semibold">{service.title}</h3>

@@ -31,8 +31,8 @@ const { eyebrow, title, highlight, subtitle, channels, hours } = Astro.props;
 
     <ul class="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-3">
       {
-        channels.map((channel) => (
-          <li>
+        channels.map((channel, index) => (
+          <li data-reveal style={`--reveal-delay:${Math.min(index, 5) * 70}ms`}>
             <a
               href={channel.href}
               target={channel.external ? '_blank' : undefined}
@@ -49,6 +49,7 @@ const { eyebrow, title, highlight, subtitle, channels, hours } = Astro.props;
     </ul>
 
     <p
+      data-reveal
       class="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-card px-6 py-3 text-sm text-ink-soft shadow-card"
     >
       <Icon name="clock" class="size-4 text-whatsapp" />

@@ -23,6 +23,15 @@ const { title, description, path, image, noindex, jsonLd, skipLabel } = Astro.pr
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f9fcfe" />
     <SEO {title} {description} {path} {image} {noindex} {jsonLd} />
+    <!-- Activa la entrada al scroll antes del primer pintado; si el script de abajo falla, se desactiva -->
+    <script is:inline>
+      if ('IntersectionObserver' in window) {
+        document.documentElement.classList.add('reveal-ready');
+        setTimeout(function () {
+          if (!window.__revealReady) document.documentElement.classList.remove('reveal-ready');
+        }, 2500);
+      }
+    </script>
   </head>
   <body>
     <a
@@ -36,5 +45,21 @@ const { title, description, path, image, noindex, jsonLd, skipLabel } = Astro.pr
       <slot />
     </main>
     <slot name="footer" />
+    <script>
+      const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        },
+        // Se dispara algo antes de entrar del todo, para no hacer esperar a quien lee.
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+      );
+      items.forEach((item) => observer.observe(item));
+      (window as unknown as { __revealReady: boolean }).__revealReady = true;
+    </script>
   </body>
 </html>

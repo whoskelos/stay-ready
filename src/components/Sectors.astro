@@ -21,8 +21,8 @@ const { eyebrow, title, highlight, subtitle, sectors } = Astro.props;
     <!-- Cuadrícula en lugar de carrusel: todo el contenido visible sin interacción -->
     <ul class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
       {
-        sectors.map((sector) => (
-          <li class="flex min-h-36 flex-col items-center justify-center gap-4 rounded-(--radius-tile) bg-card p-4 text-center">
+        sectors.map((sector, index) => (
+          <li data-reveal style={`--reveal-delay:${Math.min(index, 5) * 70}ms`} class="flex min-h-36 flex-col items-center justify-center gap-4 rounded-(--radius-tile) bg-card p-4 text-center">
             <Icon name={sector.icon} class="size-8 text-teal" />
             <span class="font-display text-xs font-medium tracking-wide text-navy uppercase">
               {sector.title}

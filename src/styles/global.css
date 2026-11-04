@@ -116,6 +116,27 @@
     border-radius: 0.25rem;
   }
 
+  /*
+   * Entrada al hacer scroll. Mejora progresiva: solo se oculta nada si hay JS
+   * (`reveal-ready`) y el usuario no pidió menos movimiento. Es una animación
+   * corta (opacidad + 20 px) que no desplaza el layout, así no afecta al CLS.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-ready [data-reveal] {
+      opacity: 0;
+      translate: 0 1.25rem;
+      transition:
+        opacity 500ms ease-out,
+        translate 600ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .reveal-ready [data-reveal].is-visible {
+      opacity: 1;
+      translate: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
