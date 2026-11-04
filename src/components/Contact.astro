@@ -37,7 +37,7 @@ const { eyebrow, title, highlight, subtitle, channels, hours } = Astro.props;
               href={channel.href}
               target={channel.external ? '_blank' : undefined}
               rel={channel.external ? 'noopener noreferrer' : undefined}
-              class="flex h-full min-h-44 flex-col items-center justify-center gap-3 rounded-3xl bg-card p-8 text-center shadow-card transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:shadow-lift motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              class="flex h-full min-h-44 flex-col items-center justify-center gap-3 rounded-3xl bg-card p-8 text-center shadow-card transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:shadow-lift motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               <IconBadge name={channel.icon} tone={channel.tone} size="size-16" iconClass="size-7" />
               <span class="font-display text-lg font-semibold text-navy">{channel.title}</span>
