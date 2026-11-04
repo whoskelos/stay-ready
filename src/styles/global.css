@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/* Fuentes autoalojadas (Fontsource), solo subconjunto latino y 4 pesos. */
+@import '@fontsource/outfit/latin-600.css';
+@import '@fontsource/outfit/latin-700.css';
+@import '@fontsource/plus-jakarta-sans/latin-400.css';
+@import '@fontsource/plus-jakarta-sans/latin-500.css';
+
+/* Tokens de diseño: única fuente de verdad para color, tipografía y radios. */
+@theme {
+  --color-navy: #0c2352;
+  --color-teal: #00948f;
+  /* Variante oscurecida del teal para texto pequeño: el teal puro da 3,6:1 y no cumple AA. */
+  --color-teal-text: #007a76;
+  --color-whatsapp: #3fc168;
+  --color-bg: #f9fcfe;
+  --color-card: #ffffff;
+  --color-ink: #07183a;
+  --color-ink-soft: #52657a;
+  --color-surface: #e7f4f7;
+  --color-surface-alt: #ecf5f8;
+  --color-line: #d8e3e9;
+  --color-error: #e7000b;
+
+  --color-brand-mid: #005d8d;
+  --color-text-gradient-start: #0080a2;
+
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.5rem;
+  --radius-tile: 1.25rem;
+  --radius-banner: 2rem;
+
+  --shadow-card: 0 1px 2px rgb(12 35 82 / 0.04), 0 8px 24px rgb(12 35 82 / 0.06);
+  --shadow-icon: 0 8px 20px rgb(0 148 143 / 0.3);
+
+  --container-page: 64rem;
+}
+
+/* Degradados de marca reutilizables */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-navy) 0%,
+    var(--color-brand-mid) 50%,
+    var(--color-teal) 100%
+  );
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-text-gradient-start),
+    var(--color-teal)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa la cabecera fija al saltar a un ancla */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-navy);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
