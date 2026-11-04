@@ -18,7 +18,7 @@ const firstWords = words.join(' ');
 
 <span class:list={['inline-flex items-center gap-2.5', className]}>
   <!-- Doble de densidad respecto al tamaño mostrado (h-10) para pantallas retina -->
-  <Image src={logo} alt="" width={66} height={80} class="h-10 w-auto" />
+  <Image src={logo} alt="" width={66} height={80} loading="eager" class="h-10 w-auto" />
   {
     !iconOnly && (
       <span class="font-display text-lg leading-none font-bold tracking-wide text-navy uppercase">
