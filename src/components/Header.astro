@@ -28,7 +28,7 @@ const { nav, phone, callHref, callLabel, name, a11y } = Astro.props;
 
     <nav aria-label={a11y.mainNav} class="hidden lg:block">
       <ul class="relative flex items-center gap-1 rounded-full bg-white/65 p-1 backdrop-blur-md transition-colors group-data-[scrolled]:bg-transparent group-data-[scrolled]:backdrop-blur-none motion-reduce:transition-none">
-        <li id="nav-pill" role="presentation" aria-hidden="true" class="pointer-events-none absolute top-0 left-0 rounded-full bg-surface opacity-0"></li>
+        <li id="nav-pill" role="presentation" aria-hidden="true" class="pointer-events-none absolute top-0 left-0 rounded-full bg-surface opacity-0 data-[ready]:transition-[transform,width] data-[ready]:duration-350 data-[ready]:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:data-[ready]:transition-none"></li>
         {
           nav.map((item) => (
             <li>
@@ -116,11 +116,7 @@ const { nav, phone, callHref, callLabel, name, a11y } = Astro.props;
     if (!pillReady) {
       // Primera colocación sin animar; las siguientes sí se deslizan.
       pillReady = true;
-      requestAnimationFrame(() => {
-        pill.style.transition = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'none'
-          : 'transform 350ms cubic-bezier(0.22, 1, 0.36, 1), width 350ms cubic-bezier(0.22, 1, 0.36, 1)';
-      });
+      requestAnimationFrame(() => pill.setAttribute('data-ready', ''));
     }
   };
 

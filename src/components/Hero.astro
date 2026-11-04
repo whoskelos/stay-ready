@@ -54,14 +54,14 @@ const { eyebrow, title, highlight, text, ctaLabel, ctaHref, phone, callHref, ava
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
             href={ctaHref}
-            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy px-7 font-display font-semibold text-white transition-colors hover:bg-ink"
+            class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy px-7 font-display font-semibold text-white transition-colors hover:bg-ink motion-reduce:transition-none"
           >
             {ctaLabel}
-            <Icon name="arrow-right" class="size-4" />
+            <Icon name="arrow-right" class="size-4 transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0" />
           </a>
           <a
             href={callHref}
-            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white/90 px-7 font-display font-semibold text-navy shadow-card transition-colors hover:bg-white"
+            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white/90 px-7 font-display font-semibold text-navy shadow-card transition-colors hover:bg-white motion-reduce:transition-none"
           >
             <Icon name="phone" class="size-4 text-teal" />
             {phone}
