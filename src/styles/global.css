@@ -35,6 +35,18 @@
   --shadow-card: 0 1px 2px rgb(12 35 82 / 0.04), 0 8px 24px rgb(12 35 82 / 0.06);
   --shadow-lift: 0 2px 6px rgb(12 35 82 / 0.04), 0 14px 32px rgb(12 35 82 / 0.10);
 
+  /* Flotación suave de las tarjetas del hero */
+  --animate-float: float 6s ease-in-out infinite;
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
   /* Halo del botón flotante de WhatsApp */
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
   @keyframes pulse-ring {
