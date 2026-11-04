@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: string;
+  tagline: string;
+}
+
+const { name, tagline } = Astro.props;
+// Año fijado en el build: la web es estática, se actualiza en cada despliegue.
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-navy py-6">
+  <p class="mx-auto max-w-(--container-page) px-4 text-center text-sm text-white/80 sm:px-6">
+    © {year}
+    {name} · {tagline}
+  </p>
+</footer>
