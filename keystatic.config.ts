@@ -190,6 +190,14 @@ export default config({
           },
           { label: 'Contacto' },
         ),
+        notFound: fields.object(
+          {
+            title: fields.text({ label: 'Titular', ...required }),
+            text: fields.text({ label: 'Texto', multiline: true, ...required }),
+            ctaLabel: fields.text({ label: 'Texto del botón (volver al inicio)', ...required }),
+          },
+          { label: 'Página 404' },
+        ),
       },
     }),
   },

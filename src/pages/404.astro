@@ -1,0 +1,34 @@
+---
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import Logo from '../components/Logo.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getHome, getSite } from '../lib/content';
+
+const [site, home] = await Promise.all([getSite(), getHome()]);
+const { title, text, ctaLabel } = home.notFound;
+---
+
+<BaseLayout
+  title={`${title} | ${site.name}`}
+  description={text}
+  path="/404"
+  skipLabel={site.a11y.skipLink}
+  noindex
+>
+  <section class="flex min-h-svh flex-col items-center justify-center bg-brand-gradient px-4 py-20 text-center text-white">
+    <a href="/" aria-label={`${site.name}. ${site.a11y.homeLink}`} class="rounded-2xl bg-white/95 px-5 py-3">
+      <Logo name={site.name} />
+    </a>
+    <h1 class="mt-10 max-w-xl text-4xl leading-tight font-semibold text-white sm:text-5xl">{title}</h1>
+    <p class="mt-5 max-w-md text-lg leading-relaxed text-white/90">{text}</p>
+    <a
+      href="/"
+      class="mt-9 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-7 font-display font-semibold text-navy transition-colors hover:bg-surface motion-reduce:transition-none"
+    >
+      {ctaLabel}
+      <Icon name="arrow-right" class="size-4" />
+    </a>
+  </section>
+  <Footer slot="footer" name={site.name} tagline={site.tagline} />
+</BaseLayout>

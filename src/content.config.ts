@@ -56,6 +56,11 @@ const home = defineCollection({
       callLabel: z.string().min(1),
       emailLabel: z.string().min(1),
     }),
+    notFound: z.object({
+      title: z.string().min(1),
+      text: z.string().min(1),
+      ctaLabel: z.string().min(1),
+    }),
   }),
 });
 

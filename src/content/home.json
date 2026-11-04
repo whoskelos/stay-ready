@@ -62,5 +62,10 @@
     "whatsappHint": "La vía más rápida",
     "callLabel": "Llamar ahora",
     "emailLabel": "Enviar email"
+  },
+  "notFound": {
+    "title": "No encontramos esta página",
+    "text": "Puede que el enlace esté roto o que la página ya no exista. Vuelve al inicio y te ayudamos a encontrar lo que buscas.",
+    "ctaLabel": "Volver al inicio"
   }
 }
