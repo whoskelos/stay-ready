@@ -113,6 +113,19 @@ export default config({
           },
           { label: 'SEO por defecto' },
         ),
+        a11y: fields.object(
+          {
+            skipLink: fields.text({ label: 'Enlace «saltar al contenido»', ...required }),
+            mainNav: fields.text({ label: 'Nombre del menú principal', ...required }),
+            mobileNav: fields.text({ label: 'Nombre del menú móvil', ...required }),
+            openMenu: fields.text({ label: 'Botón de abrir menú', ...required }),
+            homeLink: fields.text({ label: 'Enlace del logo (ir al inicio)', ...required }),
+          },
+          {
+            label: 'Textos de accesibilidad',
+            description: 'Los leen los lectores de pantalla; no se ven en la web.',
+          },
+        ),
       },
     }),
     home: singleton({

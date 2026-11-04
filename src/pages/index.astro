@@ -23,11 +23,17 @@ const [site, home, values, services, steps, sectors] = await Promise.all([
 const callHref = telHref(site);
 ---
 
-<BaseLayout title={site.seo.title} description={site.seo.description} path="/">
+<BaseLayout
+  title={site.seo.title}
+  description={site.seo.description}
+  path="/"
+  skipLabel={site.a11y.skipLink}
+>
   <Header
     slot="header"
     nav={site.nav}
     name={site.name}
+    a11y={site.a11y}
     phone={site.phone}
     callHref={callHref}
     callLabel={home.contact.callLabel}

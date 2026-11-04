@@ -8,9 +8,10 @@ interface Props {
   callHref: string;
   callLabel: string;
   name: string;
+  a11y: { mainNav: string; mobileNav: string; openMenu: string; homeLink: string };
 }
 
-const { nav, phone, callHref, callLabel, name } = Astro.props;
+const { nav, phone, callHref, callLabel, name, a11y } = Astro.props;
 ---
 
 <!-- Fijo arriba; al hacer scroll `data-scrolled` lo convierte en píldora flotante -->
@@ -21,11 +22,11 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
   <div
     class="mx-auto flex max-w-(--container-page) items-center justify-between gap-4 bg-transparent px-4 py-2 transition-[border-radius,background-color,box-shadow] duration-300 group-data-[scrolled]:rounded-full group-data-[scrolled]:bg-white/90 group-data-[scrolled]:shadow-card group-data-[scrolled]:backdrop-blur-md motion-reduce:transition-none sm:px-6"
   >
-    <a href="#inicio" aria-label={`${name}, ir al inicio`} class="shrink-0">
-      <Logo />
+    <a href="#inicio" aria-label={`${name}. ${a11y.homeLink}`} class="shrink-0">
+      <Logo {name} />
     </a>
 
-    <nav aria-label="Principal" class="hidden lg:block">
+    <nav aria-label={a11y.mainNav} class="hidden lg:block">
       <ul class="relative flex items-center gap-1 rounded-full bg-white/65 p-1 backdrop-blur-md transition-colors group-data-[scrolled]:bg-transparent group-data-[scrolled]:backdrop-blur-none motion-reduce:transition-none">
         <li id="nav-pill" role="presentation" aria-hidden="true" class="pointer-events-none absolute top-0 left-0 rounded-full bg-surface opacity-0"></li>
         {
@@ -56,7 +57,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
       <button
         type="button"
         popovertarget="mobile-menu"
-        aria-label="Abrir menú"
+        aria-label={a11y.openMenu}
         class="inline-flex size-11 items-center justify-center rounded-full bg-white/70 text-navy transition-colors hover:bg-surface group-data-[scrolled]:bg-transparent group-data-[scrolled]:hover:bg-surface lg:hidden"
       >
         <Icon name="menu" class="size-6" />
@@ -67,7 +68,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
   <nav
     id="mobile-menu"
     popover
-    aria-label="Menú móvil"
+    aria-label={a11y.mobileNav}
     class="fixed top-20 right-4 bottom-auto left-4 m-0 w-auto rounded-3xl border border-line bg-card p-3 shadow-card sm:right-6 sm:left-auto sm:w-80 lg:hidden"
   >
     <ul>
@@ -106,7 +107,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
   const pill = document.getElementById('nav-pill');
   let pillReady = false;
   const movePill = () => {
-    const active = document.querySelector<HTMLElement>('nav[aria-label="Principal"] a[aria-current]');
+    const active = document.querySelector<HTMLElement>('#site-header nav:not(#mobile-menu) a[aria-current]');
     if (!pill || !active || active.offsetWidth === 0) return;
     pill.style.width = `${active.offsetWidth}px`;
     pill.style.height = `${active.offsetHeight}px`;

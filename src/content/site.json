@@ -1,42 +1,49 @@
 {
-    "name":  "Stay Ready",
-    "tagline":  "Limpieza y mantenimiento",
-    "phone":  "+34 600 000 000",
-    "phoneDigits":  "34600000000",
-    "email":  "info@stayready.es",
-    "whatsappNumber":  "34600000000",
-    "whatsappMessage":  "Hola, me gustaría solicitar un presupuesto de limpieza y mantenimiento.",
-    "hoursShort":  "Lun–Sáb 8:00–20:00",
-    "hoursLong":  "Lunes a sábado · 8:00 – 20:00",
-    "city":  "Madrid",
-    "nav":  [
-                {
-                    "href":  "#inicio",
-                    "label":  "Inicio"
-                },
-                {
-                    "href":  "#soluciones",
-                    "label":  "Soluciones"
-                },
-                {
-                    "href":  "#sectores",
-                    "label":  "Sectores"
-                },
-                {
-                    "href":  "#como-trabajamos",
-                    "label":  "Cómo trabajamos"
-                },
-                {
-                    "href":  "#sobre-nosotros",
-                    "label":  "Sobre nosotros"
-                },
-                {
-                    "href":  "#contacto",
-                    "label":  "Contacto"
-                }
-            ],
-    "seo":  {
-                "title":  "Limpieza y mantenimiento de empresas en Madrid | Stay Ready",
-                "description":  "Servicios profesionales de limpieza y mantenimiento para empresas en Madrid. Presupuesto cerrado, equipo supervisado y respuesta rápida por WhatsApp o teléfono."
-            }
+  "name": "Stay Ready",
+  "tagline": "Limpieza y mantenimiento",
+  "phone": "+34 600 000 000",
+  "phoneDigits": "34600000000",
+  "email": "info@stayready.es",
+  "whatsappNumber": "34600000000",
+  "whatsappMessage": "Hola, me gustaría solicitar un presupuesto de limpieza y mantenimiento.",
+  "hoursShort": "Lun–Sáb 8:00–20:00",
+  "hoursLong": "Lunes a sábado · 8:00 – 20:00",
+  "city": "Madrid",
+  "nav": [
+    {
+      "label": "Inicio",
+      "href": "#inicio"
+    },
+    {
+      "label": "Soluciones",
+      "href": "#soluciones"
+    },
+    {
+      "label": "Sectores",
+      "href": "#sectores"
+    },
+    {
+      "label": "Cómo trabajamos",
+      "href": "#como-trabajamos"
+    },
+    {
+      "label": "Sobre nosotros",
+      "href": "#sobre-nosotros"
+    },
+    {
+      "label": "Contacto",
+      "href": "#contacto"
+    }
+  ],
+  "seo": {
+    "title": "Limpieza y mantenimiento de empresas en Madrid | Stay Ready",
+    "description": "Servicios profesionales de limpieza y mantenimiento para empresas en Madrid. Presupuesto cerrado, equipo supervisado y respuesta rápida por WhatsApp o teléfono."
+  },
+  "a11y": {
+    "skipLink": "Saltar al contenido",
+    "mainNav": "Principal",
+    "mobileNav": "Menú móvil",
+    "openMenu": "Abrir menú",
+    "homeLink": "Ir al inicio"
+  }
 }

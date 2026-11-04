@@ -9,9 +9,11 @@ interface Props {
   image?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
+  /** Texto del enlace «saltar al contenido». */
+  skipLabel: string;
 }
 
-const { title, description, path, image, noindex, jsonLd } = Astro.props;
+const { title, description, path, image, noindex, jsonLd, skipLabel } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,7 +29,7 @@ const { title, description, path, image, noindex, jsonLd } = Astro.props;
       href="#contenido"
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-white"
     >
-      Saltar al contenido
+      {skipLabel}
     </a>
     <slot name="header" />
     <main id="contenido">

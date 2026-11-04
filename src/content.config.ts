@@ -80,6 +80,14 @@ const site = defineCollection({
       title: z.string().min(1),
       description: z.string().min(1),
     }),
+    // Textos de interfaz que solo leen los lectores de pantalla (accesibilidad).
+    a11y: z.object({
+      skipLink: z.string().min(1),
+      mainNav: z.string().min(1),
+      mobileNav: z.string().min(1),
+      openMenu: z.string().min(1),
+      homeLink: z.string().min(1),
+    }),
   }),
 });
 
