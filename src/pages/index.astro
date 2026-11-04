@@ -1,4 +1,5 @@
 ---
+import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import Header from '../components/Header.astro';
@@ -40,6 +41,7 @@ const callHref = telHref(site);
   <Solutions {...home.solutions} {services} />
   <Sectors {...home.sectors} {sectors} />
   <Process {...home.process} {steps} />
+  <About {...home.about} />
   <Contact
     eyebrow={home.contact.eyebrow}
     title={home.contact.title}
