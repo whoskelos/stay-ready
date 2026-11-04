@@ -1,0 +1,35 @@
+---
+interface Props {
+  /** Muestra solo la gota, sin el nombre. */
+  iconOnly?: boolean;
+  class?: string;
+}
+
+const { iconOnly = false, class: className = '' } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+  <svg viewBox="0 0 64 76" class="h-9 w-auto" aria-hidden="true">
+    <!-- Gota -->
+    <path
+      d="M32 3C32 3 8 27 8 47a24 24 0 0 0 48 0C56 27 32 3 32 3z"
+      fill="none" class="stroke-teal" stroke-width="3.5"
+      stroke-linejoin="round"
+    ></path>
+    <!-- Edificios -->
+    <rect x="25" y="26" width="12" height="32" class="fill-navy"></rect>
+    <rect x="19" y="38" width="6" height="20" class="fill-brand-mid"></rect>
+    <rect x="37" y="34" width="9" height="24" class="fill-teal"></rect>
+    <!-- Hoja -->
+    <path d="M24 59c11 2 21-3 27-12 .4 10-8 19-23 19z" class="fill-teal"></path>
+    <!-- Destellos -->
+    <path d="M54 14l1.5 3.8 3.8 1.5-3.8 1.5L54 24.6l-1.5-3.8-3.8-1.5 3.8-1.5z" class="fill-teal"></path>
+  </svg>
+  {
+    !iconOnly && (
+      <span class="font-display text-lg leading-none font-bold tracking-wide text-navy">
+        STAY <span class="text-teal-text">READY</span>
+      </span>
+    )
+  }
+</span>

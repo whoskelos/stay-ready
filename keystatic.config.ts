@@ -82,6 +82,21 @@ export default config({
         hoursShort: fields.text({ label: 'Horario (versión corta)', ...required }),
         hoursLong: fields.text({ label: 'Horario (versión larga)', ...required }),
         city: fields.text({ label: 'Ciudad de servicio', ...required }),
+        nav: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Texto del enlace', ...required }),
+            href: fields.text({
+              label: 'Ancla',
+              description: 'Con almohadilla y en minúsculas, p. ej. #soluciones.',
+              validation: { isRequired: true, pattern: { regex: /^#[a-z-]+$/, message: 'Formato: #ancla' } },
+            }),
+          }),
+          {
+            label: 'Menú de navegación',
+            itemLabel: (props) => props.fields.label.value,
+            validation: { length: { min: 1 } },
+          },
+        ),
         seo: fields.object(
           {
             title: fields.text({

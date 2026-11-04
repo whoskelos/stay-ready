@@ -73,6 +73,9 @@ const site = defineCollection({
     hoursShort: z.string().min(1),
     hoursLong: z.string().min(1),
     city: z.string().min(1),
+    nav: z
+      .array(z.object({ label: z.string().min(1), href: z.string().regex(/^#[a-z-]+$/) }))
+      .min(1),
     seo: z.object({
       title: z.string().min(1),
       description: z.string().min(1),

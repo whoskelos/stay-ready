@@ -1,0 +1,25 @@
+---
+import type { IconName } from '../lib/icons';
+import { iconPaths, type UiIconName } from '../lib/icon-paths';
+
+interface Props {
+  name: IconName | UiIconName;
+  class?: string;
+}
+
+const { name, class: className = 'size-5' } = Astro.props;
+---
+
+<!-- Decorativo: el significado siempre lo da el texto que lo acompaña -->
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  class={className}
+>
+  {iconPaths[name].map((d) => <path d={d} />)}
+</svg>
