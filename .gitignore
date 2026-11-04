@@ -22,3 +22,24 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# environment variables (cualquier entorno, salvo el ejemplo)
+.env.*
+!.env.example
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Vercel (se crea al enlazar el proyecto con la CLI)
+.vercel/
+
+# editor y agentes locales
+# .vscode/ se publica a propósito (extensiones recomendadas de Astro)
+.cursor/
+
+# informes y capturas temporales de auditoría
+lighthouse*.json
+lh-report*.json
+*.tmp.*
+*.log
