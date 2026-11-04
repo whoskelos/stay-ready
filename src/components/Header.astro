@@ -1,0 +1,102 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+
+interface Props {
+  nav: { label: string; href: string }[];
+  phone: string;
+  callHref: string;
+  callLabel: string;
+  name: string;
+}
+
+const { nav, phone, callHref, callLabel, name } = Astro.props;
+---
+
+<!-- Fijo arriba; al hacer scroll `data-scrolled` lo convierte en píldora flotante -->
+<header
+  id="site-header"
+  class="group fixed inset-x-0 top-0 z-40 transition-[padding] duration-300 data-[scrolled]:px-4 data-[scrolled]:pt-3 motion-reduce:transition-none sm:data-[scrolled]:px-6"
+>
+  <div
+    class="mx-auto flex max-w-[120rem] items-center justify-between gap-4 bg-white/70 px-4 py-2 backdrop-blur-md transition-[max-width,border-radius,background-color,box-shadow] duration-300 group-data-[scrolled]:max-w-(--container-page) group-data-[scrolled]:rounded-full group-data-[scrolled]:bg-white/90 group-data-[scrolled]:shadow-card motion-reduce:transition-none sm:px-6"
+  >
+    <a href="#inicio" aria-label={`${name}, ir al inicio`} class="shrink-0">
+      <Logo />
+    </a>
+
+    <nav aria-label="Principal" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="inline-flex min-h-11 items-center rounded-full px-3 text-sm whitespace-nowrap font-medium text-ink-soft transition-colors hover:bg-surface hover:text-navy aria-[current=true]:bg-surface aria-[current=true]:text-navy"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={callHref}
+        aria-label={`${callLabel}: ${phone}`}
+        class="inline-flex min-h-11 items-center gap-2 rounded-full bg-navy px-4 text-sm whitespace-nowrap font-semibold text-white transition-colors hover:bg-ink sm:px-5 max-sm:size-11 max-sm:justify-center max-sm:px-0"
+      >
+        <Icon name="phone" class="size-4" />
+        <span class="hidden sm:inline">{callLabel}</span>
+      </a>
+      <!-- Menú móvil con el atributo nativo `popover`: sin librerías ni estado en JS -->
+      <button
+        type="button"
+        popovertarget="mobile-menu"
+        aria-label="Abrir menú"
+        class="inline-flex size-11 items-center justify-center rounded-full text-navy hover:bg-surface lg:hidden"
+      >
+        <Icon name="menu" class="size-6" />
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    popover
+    aria-label="Menú móvil"
+    class="fixed inset-x-4 top-20 m-0 mx-auto w-auto max-w-sm rounded-3xl border border-line bg-card p-3 shadow-card lg:hidden"
+  >
+    <ul>
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="flex min-h-11 items-center rounded-2xl px-4 font-medium text-navy hover:bg-surface"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const menu = document.getElementById('mobile-menu');
+
+  // Umbral pequeño: la píldora aparece en cuanto el usuario empieza a bajar.
+  const update = () => header?.toggleAttribute('data-scrolled', window.scrollY > 24);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+
+  // Cierra el menú móvil al elegir una sección
+  menu?.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement).closest('a')) menu.hidePopover();
+  });
+</script>

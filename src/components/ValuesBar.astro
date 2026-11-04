@@ -1,0 +1,26 @@
+---
+import type { IconName } from '../lib/icons';
+import Icon from './Icon.astro';
+
+interface Props {
+  values: { title: string; description?: string; icon: IconName }[];
+}
+
+const { values } = Astro.props;
+---
+
+<ul
+  class="grid grid-cols-1 overflow-hidden rounded-3xl bg-card shadow-card sm:grid-cols-2 lg:grid-cols-4"
+>
+  {
+    values.map((value) => (
+      <li class="flex items-start gap-3 border-b border-line p-5 last:border-b-0 sm:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0">
+        <Icon name={value.icon} class="mt-0.5 size-8 shrink-0 text-teal" />
+        <div>
+          <h3 class="font-display text-base font-semibold text-navy">{value.title}</h3>
+          <p class="mt-1 text-sm leading-snug text-ink-soft">{value.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>

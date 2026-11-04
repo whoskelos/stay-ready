@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/hero-gradient.jpg';
+import type { IconName } from '../lib/icons';
+import Icon from './Icon.astro';
+import ValuesBar from './ValuesBar.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  highlight: string;
+  text: string;
+  ctaLabel: string;
+  ctaHref: string;
+  phone: string;
+  callHref: string;
+  availability: string;
+  cards: { title: string; subtitle: string; icon: IconName }[];
+  values: { title: string; description?: string; icon: IconName }[];
+}
+
+const { eyebrow, title, highlight, text, ctaLabel, ctaHref, phone, callHref, availability, cards, values } =
+  Astro.props;
+---
+
+<section id="inicio" class="relative isolate overflow-hidden">
+  <!-- Fondo: imagen del primer pantallazo, única que carga con prioridad alta -->
+  <Image
+    src={heroImage}
+    alt=""
+    widths={[640, 1024, 1440, 2048]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 -z-20 size-full object-cover object-[65%_center]"
+  />
+  <!-- Velo claro: garantiza contraste del texto sobre la zona clara de la imagen -->
+  <div
+    class="absolute inset-0 -z-10 bg-bg/75 lg:bg-transparent lg:bg-linear-to-r lg:from-bg lg:via-bg/50 lg:to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="mx-auto flex min-h-svh max-w-(--container-page) flex-col px-4 pt-28 sm:px-6">
+    <div class="grid flex-1 items-center gap-10 pb-12 lg:grid-cols-[1.15fr_1fr]">
+      <div>
+        <p class="text-xs font-medium tracking-[0.25em] text-teal-text">{eyebrow}</p>
+        <h1 class="mt-4 text-5xl leading-[1.05] font-semibold sm:text-6xl">
+          {title}{' '}
+          <span class="text-gradient">{highlight}</span>
+        </h1>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-ink-soft">{text}</p>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={ctaHref}
+            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-navy px-7 font-display font-semibold text-white transition-colors hover:bg-ink"
+          >
+            {ctaLabel}
+            <Icon name="arrow-right" class="size-4" />
+          </a>
+          <a
+            href={callHref}
+            class="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white/90 px-7 font-display font-semibold text-navy shadow-card transition-colors hover:bg-white"
+          >
+            <Icon name="phone" class="size-4 text-teal" />
+            {phone}
+          </a>
+        </div>
+
+        <p class="mt-6 flex items-center gap-2 text-sm text-ink-soft">
+          <span class="size-2 shrink-0 rounded-full bg-whatsapp" aria-hidden="true"></span>
+          {availability}
+        </p>
+      </div>
+
+      <!-- Tarjetas informativas con efecto vidrio: solo se usa aquí -->
+      <ul class="grid gap-4 sm:grid-cols-2 lg:flex lg:flex-col lg:items-end lg:gap-16">
+        {
+          cards.map((card, index) => (
+            <li
+              class:list={[
+                'w-full max-w-64 rounded-3xl border border-white/50 bg-white/55 p-5 shadow-card backdrop-blur-xl',
+                index === 1 && 'lg:self-start',
+              ]}
+            >
+              <Icon name={card.icon} class="size-5 text-teal" />
+              <p class="mt-3 font-display text-lg leading-snug font-semibold text-navy">{card.title}</p>
+              <p class="mt-1 text-sm text-ink-soft">{card.subtitle}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="pb-8">
+      <ValuesBar values={values} />
+    </div>
+  </div>
+</section>

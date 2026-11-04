@@ -1,28 +1,30 @@
 ---
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { telHref, whatsappHref } from '../lib/contact';
 import { getHome, getOrderedItems, getSite } from '../lib/content';
 
-const [site, home, services, sectors, steps, values] = await Promise.all([
-  getSite(),
-  getHome(),
-  getOrderedItems('services'),
-  getOrderedItems('sectors'),
-  getOrderedItems('steps'),
-  getOrderedItems('values'),
-]);
+const [site, home, values] = await Promise.all([getSite(), getHome(), getOrderedItems('values')]);
+const callHref = telHref(site);
 ---
 
 <BaseLayout title={site.seo.title} description={site.seo.description} path="/">
-  <section id="inicio" class="mx-auto max-w-(--container-page) px-6 py-16">
-    <p class="font-display text-sm tracking-[0.2em] text-teal-text">{home.hero.eyebrow}</p>
-    <h1 class="mt-3 text-5xl font-bold">
-      {home.hero.title}
-      <span class="text-gradient">{home.hero.highlight}</span>
-    </h1>
-    <p class="mt-6 max-w-xl text-ink-soft">{home.hero.text}</p>
-    <p class="mt-8 text-sm text-ink-soft">
-      Esqueleto de la FASE 1 · {services.length} servicios · {sectors.length} sectores · {steps.length}
-      pasos · {values.length} valores
-    </p>
-  </section>
+  <Header
+    slot="header"
+    nav={site.nav}
+    name={site.name}
+    phone={site.phone}
+    callHref={callHref}
+    callLabel={home.contact.callLabel}
+  />
+  <Hero
+    {...home.hero}
+    ctaHref="#contacto"
+    phone={site.phone}
+    callHref={callHref}
+    values={values}
+  />
+  <FloatingWhatsApp href={whatsappHref(site)} label={`${home.contact.whatsappLabel}: ${home.contact.whatsappHint}`} />
 </BaseLayout>
