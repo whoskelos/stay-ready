@@ -32,7 +32,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
             <li>
               <a
                 href={item.href}
-                class="inline-flex min-h-11 items-center rounded-full px-3 text-sm whitespace-nowrap font-medium text-navy transition-colors hover:bg-surface hover:text-navy aria-[current=true]:bg-surface aria-[current=true]:text-navy"
+                class="inline-flex min-h-11 items-center rounded-full px-3 text-sm whitespace-nowrap font-medium text-navy transition-colors duration-300 ease-out motion-reduce:transition-none hover:bg-surface hover:text-navy aria-[current=true]:bg-surface aria-[current=true]:text-navy"
               >
                 {item.label}
               </a>
@@ -75,7 +75,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
           <li>
             <a
               href={item.href}
-              class="flex min-h-11 items-center rounded-2xl px-4 font-medium text-navy hover:bg-surface aria-[current=true]:bg-surface"
+              class="flex min-h-11 items-center rounded-2xl px-4 font-medium text-navy transition-colors duration-300 ease-out motion-reduce:transition-none hover:bg-surface aria-[current=true]:bg-surface"
             >
               {item.label}
             </a>
