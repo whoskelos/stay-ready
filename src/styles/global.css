@@ -34,6 +34,20 @@
 
   --shadow-card: 0 1px 2px rgb(12 35 82 / 0.04), 0 8px 24px rgb(12 35 82 / 0.06);
   --shadow-lift: 0 2px 6px rgb(12 35 82 / 0.04), 0 14px 32px rgb(12 35 82 / 0.10);
+
+  /* Halo del botón flotante de WhatsApp */
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.5;
+    }
+    80%,
+    100% {
+      transform: scale(1.7);
+      opacity: 0;
+    }
+  }
   --shadow-icon: 0 8px 20px rgb(0 148 143 / 0.3);
 
   --container-page: 72rem;
