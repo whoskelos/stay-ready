@@ -1,0 +1,66 @@
+{
+  "hero": {
+    "eyebrow": "LIMPIEZA Y MANTENIMIENTO",
+    "title": "Soluciones profesionales de",
+    "highlight": "limpieza y mantenimiento.",
+    "text": "Adaptamos cada servicio a las necesidades de nuestros clientes, garantizando calidad, organización y confianza en cada proyecto.",
+    "ctaLabel": "Solicitar presupuesto",
+    "availability": "Te respondemos en menos de 15 min · Lun–Sáb 8:00–20:00",
+    "cards": [
+      {
+        "title": "Resultados impecables",
+        "subtitle": "100% compromiso de calidad",
+        "icon": "sparkles"
+      },
+      {
+        "title": "Equipo supervisado",
+        "subtitle": "Control en cada servicio",
+        "icon": "shield-check"
+      }
+    ]
+  },
+  "solutions": {
+    "eyebrow": "SOLUCIONES",
+    "title": "Todo lo que tu espacio",
+    "highlight": "necesita",
+    "subtitle": "Servicios a medida, con un único interlocutor y calidad constante."
+  },
+  "sectors": {
+    "eyebrow": "SECTORES",
+    "title": "Especialistas en cada entorno"
+  },
+  "process": {
+    "eyebrow": "CÓMO TRABAJAMOS",
+    "title": "Un proceso",
+    "highlight": "claro y sin sorpresas"
+  },
+  "about": {
+    "eyebrow": "SOBRE NOSOTROS",
+    "title": "Siempre listos para que tu espacio también lo esté.",
+    "text": "En Stay Ready combinamos un equipo profesional, procesos de control rigurosos y una atención cercana. Trabajamos con empresas, promotoras, propietarios e inversores que necesitan espacios impecables, a tiempo y sin complicaciones.",
+    "stats": [
+      {
+        "value": "+500",
+        "label": "Servicios"
+      },
+      {
+        "value": "15'",
+        "label": "Respuesta"
+      },
+      {
+        "value": "100%",
+        "label": "Compromiso"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "CONTACTO",
+    "title": "Solicita tu",
+    "highlight": "presupuesto",
+    "subtitle": "Elige el canal que prefieras. Te respondemos en menos de 15 minutos.",
+    "whatsappLabel": "WhatsApp",
+    "whatsappHint": "La vía más rápida",
+    "callLabel": "Llamar ahora",
+    "emailLabel": "Enviar email"
+  }
+}
