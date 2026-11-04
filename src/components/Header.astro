@@ -26,13 +26,14 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
     </a>
 
     <nav aria-label="Principal" class="hidden lg:block">
-      <ul class="flex items-center gap-1 rounded-full bg-white/65 p-1 backdrop-blur-md transition-colors group-data-[scrolled]:bg-transparent group-data-[scrolled]:backdrop-blur-none motion-reduce:transition-none">
+      <ul class="relative flex items-center gap-1 rounded-full bg-white/65 p-1 backdrop-blur-md transition-colors group-data-[scrolled]:bg-transparent group-data-[scrolled]:backdrop-blur-none motion-reduce:transition-none">
+        <li id="nav-pill" role="presentation" aria-hidden="true" class="pointer-events-none absolute top-0 left-0 rounded-full bg-surface opacity-0"></li>
         {
           nav.map((item) => (
             <li>
               <a
                 href={item.href}
-                class="inline-flex min-h-11 items-center rounded-full px-3 text-sm whitespace-nowrap font-medium text-navy transition-colors duration-300 ease-out motion-reduce:transition-none hover:bg-surface hover:text-navy aria-[current=true]:bg-surface aria-[current=true]:text-navy"
+                class="inline-flex min-h-11 items-center rounded-full px-3 text-sm whitespace-nowrap font-medium text-navy transition-colors duration-300 ease-out motion-reduce:transition-none relative z-10 hover:bg-surface hover:text-navy"
               >
                 {item.label}
               </a>
@@ -101,6 +102,27 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
     .map((id) => document.getElementById(id))
     .filter((el): el is HTMLElement => el !== null);
 
+  // Pill deslizante del menú de escritorio: se mueve y cambia de ancho hacia el enlace activo.
+  const pill = document.getElementById('nav-pill');
+  let pillReady = false;
+  const movePill = () => {
+    const active = document.querySelector<HTMLElement>('nav[aria-label="Principal"] a[aria-current]');
+    if (!pill || !active || active.offsetWidth === 0) return;
+    pill.style.width = `${active.offsetWidth}px`;
+    pill.style.height = `${active.offsetHeight}px`;
+    pill.style.transform = `translate(${active.offsetLeft}px, ${active.offsetTop}px)`;
+    pill.style.opacity = '1';
+    if (!pillReady) {
+      // Primera colocación sin animar; las siguientes sí se deslizan.
+      pillReady = true;
+      requestAnimationFrame(() => {
+        pill.style.transition = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'none'
+          : 'transform 350ms cubic-bezier(0.22, 1, 0.36, 1), width 350ms cubic-bezier(0.22, 1, 0.36, 1)';
+      });
+    }
+  };
+
   const markCurrent = () => {
     // Línea de lectura: un tercio de la ventana, por debajo de la cabecera.
     const line = window.innerHeight * 0.33;
@@ -114,6 +136,7 @@ const { nav, phone, callHref, callLabel, name } = Astro.props;
       if (link.getAttribute('href') === `#${current?.id}`) link.setAttribute('aria-current', 'true');
       else link.removeAttribute('aria-current');
     }
+    movePill();
   };
   markCurrent();
   window.addEventListener('scroll', markCurrent, { passive: true });
