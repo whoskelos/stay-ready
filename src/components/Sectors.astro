@@ -1,0 +1,35 @@
+---
+import type { IconName } from '../lib/icons';
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  highlight?: string;
+  subtitle?: string;
+  sectors: { title: string; icon: IconName }[];
+}
+
+const { eyebrow, title, highlight, subtitle, sectors } = Astro.props;
+---
+
+<section id="sectores" aria-labelledby="sectores-title" class="bg-surface py-20 sm:py-24">
+  <div class="mx-auto max-w-(--container-page) px-4 sm:px-6">
+    <SectionHeading {eyebrow} {title} {highlight} {subtitle} id="sectores-title" />
+
+    <!-- Cuadrícula en lugar de carrusel: todo el contenido visible sin interacción -->
+    <ul class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        sectors.map((sector) => (
+          <li class="flex min-h-36 flex-col items-center justify-center gap-4 rounded-(--radius-tile) bg-card p-4 text-center">
+            <Icon name={sector.icon} class="size-8 text-teal" />
+            <span class="font-display text-xs font-medium tracking-wide text-navy uppercase">
+              {sector.title}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
