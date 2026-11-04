@@ -1,0 +1,58 @@
+---
+import type { UiIconName } from '../lib/icon-paths';
+import Icon from './Icon.astro';
+import IconBadge from './IconBadge.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Channel {
+  title: string;
+  detail: string;
+  href: string;
+  icon: UiIconName | 'chat';
+  tone: 'brand' | 'whatsapp';
+  external?: boolean;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  highlight?: string;
+  subtitle?: string;
+  channels: Channel[];
+  hours: string;
+}
+
+const { eyebrow, title, highlight, subtitle, channels, hours } = Astro.props;
+---
+
+<section id="contacto" aria-labelledby="contacto-title" class="bg-surface py-20 sm:py-24">
+  <div class="mx-auto max-w-(--container-page) px-4 sm:px-6">
+    <SectionHeading {eyebrow} {title} {highlight} {subtitle} id="contacto-title" />
+
+    <ul class="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-3">
+      {
+        channels.map((channel) => (
+          <li>
+            <a
+              href={channel.href}
+              target={channel.external ? '_blank' : undefined}
+              rel={channel.external ? 'noopener noreferrer' : undefined}
+              class="flex h-full min-h-44 flex-col items-center justify-center gap-3 rounded-3xl bg-card p-8 text-center shadow-card"
+            >
+              <IconBadge name={channel.icon} tone={channel.tone} size="size-16" iconClass="size-7" />
+              <span class="font-display text-lg font-semibold text-navy">{channel.title}</span>
+              <span class="text-sm text-ink-soft">{channel.detail}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p
+      class="mx-auto mt-8 flex w-fit items-center gap-2 rounded-full bg-card px-6 py-3 text-sm text-ink-soft shadow-card"
+    >
+      <Icon name="clock" class="size-4 text-whatsapp" />
+      {hours}
+    </p>
+  </div>
+</section>

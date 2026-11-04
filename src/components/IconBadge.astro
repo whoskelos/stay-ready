@@ -1,0 +1,26 @@
+---
+import type { IconName } from '../lib/icons';
+import type { UiIconName } from '../lib/icon-paths';
+import Icon from './Icon.astro';
+
+interface Props {
+  name: IconName | UiIconName;
+  /** `brand` usa el degradado de marca; `whatsapp` el verde funcional del canal. */
+  tone?: 'brand' | 'whatsapp';
+  /** Clases de tamaño del círculo. */
+  size?: string;
+  iconClass?: string;
+}
+
+const { name, tone = 'brand', size = 'size-12', iconClass = 'size-5' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex shrink-0 items-center justify-center rounded-full text-white shadow-icon',
+    tone === 'brand' ? 'bg-brand-gradient' : 'bg-whatsapp',
+    size,
+  ]}
+>
+  <Icon {name} class={iconClass} />
+</span>
