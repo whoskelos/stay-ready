@@ -48,7 +48,10 @@ const itemCollection = (label: string, folder: string, withDescription: boolean)
   });
 
 export default config({
-  storage: { kind: 'local' },
+  // Local en desarrollo (edita los archivos directamente); Keystatic Cloud en
+  // producción (el cliente entra sin cuenta de GitHub y se hace commit a main).
+  storage: import.meta.env.DEV ? { kind: 'local' } : { kind: 'cloud' },
+  cloud: { project: 'stay-ready-team/stay-ready' },
   ui: { brand: { name: 'Stay Ready' } },
   singletons: {
     site: singleton({

@@ -4,16 +4,18 @@ import react from '@astrojs/react';
 import keystatic from '@keystatic/astro';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import vercel from '@astrojs/vercel';
 
-// Keystatic (y React, que solo necesita el panel) se cargan únicamente en
-// desarrollo: la web se publica 100 % estática, sin adaptador ni JS extra.
-const isDev = process.argv.includes('dev');
+// La web sigue siendo estática (todas las páginas se prerenderizan). El adaptador
+// de Vercel solo sirve las rutas de Keystatic (/keystatic y /api/keystatic), que
+// necesitan servidor para que el cliente pueda editar el contenido en producción.
 
 // https://astro.build/config
 export default defineConfig({
   // TODO: sustituir por el dominio final cuando exista.
   site: 'https://tudominio.com',
-  integrations: [sitemap(), ...(isDev ? [react(), keystatic()] : [])],
+  adapter: vercel(),
+  integrations: [sitemap(), react(), keystatic()],
   vite: {
     plugins: [tailwindcss()],
   },

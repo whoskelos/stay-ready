@@ -2,8 +2,8 @@
 
 Landing de una página para **Stay Ready**, empresa de limpieza y mantenimiento para empresas en Madrid. El único objetivo de conversión es que la persona escriba por WhatsApp o llame.
 
-- **Astro** (sitio 100 % estático, sin adaptador) · **Tailwind CSS v4** · **TypeScript estricto**
-- **Contenido editable** con Keystatic (solo en local, ver más abajo) y validado con Zod
+- **Astro** (páginas 100 % estáticas; el adaptador de Vercel solo sirve el panel de Keystatic) · **Tailwind CSS v4** · **TypeScript estricto**
+- **Contenido editable** con Keystatic (local en desarrollo, Keystatic Cloud en producción) y validado con Zod
 - Tipografías self-hosted con Fontsource: Outfit y Plus Jakarta Sans
 
 ## Puesta en marcha
@@ -11,19 +11,23 @@ Landing de una página para **Stay Ready**, empresa de limpieza y mantenimiento 
 Requiere Node 22 o superior.
 
 ```sh
-npm install
-npm run dev        # http://localhost:4321  ·  panel de contenido en /keystatic
-npm run build      # genera ./dist
-npm run preview    # sirve ./dist para probar el build
+pnpm install
+pnpm dev           # http://localhost:4321  ·  panel de contenido en /keystatic
+pnpm build         # genera el build de Vercel en .vercel/output
+pnpm preview       # no aplica con el adaptador de Vercel; usa `pnpm dev`
 ```
 
 ## Cómo editar el contenido
 
-1. Ejecuta `npm run dev` y abre `http://localhost:4321/keystatic`.
-2. Edita textos, servicios, sectores, pasos o datos de contacto y pulsa **Save**. Cambia los archivos JSON de `src/content/`.
+**En producción (cliente):** entra en `https://<dominio>/keystatic`, inicia sesión con tu cuenta de Keystatic Cloud, edita y pulsa **Save**. Cada guardado hace un commit en `main` y Vercel republica la web en 1 o 2 minutos. Para dar acceso a alguien: Keystatic Cloud → equipo `stay-ready-team` → invitar (hasta 3 usuarios gratis).
+
+**En local (desarrollo):**
+
+1. Ejecuta `pnpm dev` y abre `http://localhost:4321/keystatic` (modo local, sin login).
+2. Edita y pulsa **Save**. Cambia los archivos JSON de `src/content/`.
 3. Sube los cambios a GitHub (`git add`, `git commit`, `git push`). Vercel publica solo.
 
-Keystatic y React solo se cargan en desarrollo (ver `astro.config.mjs`), así que la web publicada no incluye el panel ni JavaScript de más.
+La configuración está en `keystatic.config.ts` (`local` en desarrollo, `cloud` en producción) y `astro.config.mjs`. Las páginas siguen prerenderizadas: solo `/keystatic` y `/api/keystatic` usan función de servidor.
 
 ## Estructura
 
@@ -61,7 +65,7 @@ El dominio también alimenta el canonical, Open Graph, el sitemap, `robots.txt` 
    git branch -M main
    git push -u origin main
    ```
-2. En [vercel.com/new](https://vercel.com/new) importa el repositorio. Vercel detecta Astro; no cambies nada (Build `npm run build`, Output `dist`).
+2. En [vercel.com/new](https://vercel.com/new) importa el repositorio. Vercel detecta Astro y el adaptador; no cambies nada.
 3. Pulsa **Deploy**. Cada `git push` a `main` publica una versión nueva.
 4. Dominio: en el proyecto → **Settings → Domains → Add**, escribe tu dominio y crea en tu registrador los registros DNS que Vercel te indique (un `A` o `CNAME`, según sea dominio raíz o `www`).
 5. Con el dominio activo, cambia `site` en `astro.config.mjs`, haz commit y push.
